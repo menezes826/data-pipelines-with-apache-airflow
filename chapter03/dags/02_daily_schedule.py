@@ -9,8 +9,8 @@ from airflow.operators.python import PythonOperator
 dag = DAG(
     dag_id="02_daily_schedule",
     schedule_interval="@daily",
-    start_date=datetime(2019, 1, 1),
-    end_date=datetime(2019, 1, 5),
+    start_date=datetime(2025, 6, 1),
+    end_date=datetime(2025, 7, 14),
 )
 
 fetch_events = BashOperator(

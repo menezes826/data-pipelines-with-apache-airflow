@@ -8,7 +8,7 @@ from airflow.operators.python import PythonOperator
 dag = DAG(
     dag_id="listing_4_15",
     start_date=airflow.utils.dates.days_ago(1),
-    schedule_interval="@hourly",
+    schedule_interval=None,
     max_active_runs=1,
 )
 
@@ -29,7 +29,7 @@ get_data = PythonOperator(
         "month": "{{ execution_date.month }}",
         "day": "{{ execution_date.day }}",
         "hour": "{{ execution_date.hour }}",
-        "output_path": "/tmp/wikipageviews.gz",
+        "output_path": "/usr/data/wikipageviews.gz",
     },
     dag=dag,
 )
@@ -41,7 +41,7 @@ extract_gz = BashOperator(
 
 def _fetch_pageviews(pagenames):
     result = dict.fromkeys(pagenames, 0)
-    with open("/tmp/wikipageviews", "r") as f:
+    with open("/usr/data/wikipageviews", "r") as f:
         for line in f:
             domain_code, page_title, view_counts, _ = line.split(" ")
             if domain_code == "en" and page_title in pagenames:

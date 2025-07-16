@@ -2,12 +2,12 @@ import airflow
 
 from airflow import DAG
 from airflow.operators.dummy import DummyOperator
-
+from datetime import datetime, timedelta
 
 with DAG(
     dag_id="01_start",
-    start_date=airflow.utils.dates.days_ago(3),
-    schedule_interval="@daily",
+    start_date=datetime(2025, 7, 15),
+    schedule_interval="@once",
 ) as dag:
     start = DummyOperator(task_id="start")
 

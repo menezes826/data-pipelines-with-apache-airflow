@@ -73,6 +73,7 @@ services:
     volumes:
       - logs:/opt/airflow/logs
       - ./dags:/opt/airflow/dags
+      - ./data:/usr/data
     environment: *airflow_environment
     command: scheduler
 
